@@ -1,0 +1,19 @@
+name: check_cleaned 
+
+on:
+  push:
+    branches:
+      - '*-clean' 
+  pull_request:
+    branches:
+      - 'dev'
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: JupyterClean 
+        uses: ResearchSoftwareActions/EnsureCleanNotebooksAction@1.1

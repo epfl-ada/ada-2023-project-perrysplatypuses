@@ -1,0 +1,56 @@
+name: strip-and-push 
+
+on:
+  push:
+    branches-ignore:
+      - '*-clean' 
+      - 'dev'
+      - 'master'
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: current
+      - name: Extract branch name
+        shell: bash
+        run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
+        id: extract_branch
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ steps.extract_branch.outputs.branch }}-clean
+          path: clean
+      - name: Setup Python 
+        if: always()
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      - name: Strip notebook
+        if: always()
+        run: |
+          cd current
+          python -m pip install jupyter nbconvert nbformat
+          jupyter nbconvert --clear-output --inplace *.ipynb
+          cp *.ipynb ../clean
+      - name: commit updated notebook (old branch)
+        if: success()
+        uses: EndBug/add-and-commit@v9
+        with:
+          default_author: github_actions 
+          message: "Update stripped Notebook"
+          add: "*.ipynb"
+          new_branch: ${{ steps.extract_branch.outputs.branch }}-clean
+          cwd: "./clean"
+      - name: commit updated notebook (new branch)
+        if: failure()
+        uses: EndBug/add-and-commit@v9
+        with:
+          default_author: github_actions 
+          message: "Update stripped Notebook"
+          add: "*.ipynb"
+          new_branch: ${{ steps.extract_branch.outputs.branch }}-clean
+          cwd: "./current"
