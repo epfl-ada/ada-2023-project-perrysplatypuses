@@ -31,12 +31,15 @@ jobs:
           python -m pip install jupyter nbconvert nbformat
           jupyter nbconvert --to notebook --execute *.ipynb --clear-output
           mv *.ipynb ../main/
+          mv *.py ../main/
+          mv *.md ../clean
+          mv data ../clean/ || echo "not existing file" 
       - name: Commit updated notebook
         uses: EndBug/add-and-commit@v9
         with:
           default_author: github_actions 
           message: "Update main Notebook"
-          add: "*.ipynb"
+          add: "."
           new_branch: main 
           cwd: "./main"
  
