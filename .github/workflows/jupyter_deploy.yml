@@ -45,7 +45,7 @@ jobs:
         with:
           default_author: github_actions 
           message: "Update main Notebook"
-          add: "."
+          add: "./*"
           new_branch: main 
           cwd: "./main"
  
