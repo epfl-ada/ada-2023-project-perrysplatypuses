@@ -58,6 +58,7 @@ jobs:
           cd current
           git checkout -b ${clean_branch_name}
           git commit --allow-empty -m "init clean"
+          git push origin ${clean_branch_name}
       - name: commit updated notebook (old branch)
         if: success()
         uses: EndBug/add-and-commit@v9
