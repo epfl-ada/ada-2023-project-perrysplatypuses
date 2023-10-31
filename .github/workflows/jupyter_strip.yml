@@ -44,7 +44,14 @@ jobs:
           cd current
           cp *.py ../clean || echo "not existing file" 
           cp *.md ../clean || echo "not existing file" 
-          cp -r data ../clean/ || echo "not existing directory" 
+          cp -r data ../clean/ || echo "not existing directory"
+      - name: Empty commit
+        if: failure()
+        run: |
+          clean_branch_name="${{ steps.extract_branch.outputs.branch }}-clean"
+          cd current
+          git checkout -b ${clean_branch_name}
+          git commit --allow-empty -m "init clean"
       - name: commit updated notebook (old branch)
         if: success()
         uses: EndBug/add-and-commit@v9
@@ -62,4 +69,4 @@ jobs:
           message: "Update stripped Notebook"
           add: "./*"
           new_branch: ${{ steps.extract_branch.outputs.branch }}-clean
-          cwd: "./clean"
+          cwd: "./current"
