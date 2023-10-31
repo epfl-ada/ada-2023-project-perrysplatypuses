@@ -36,6 +36,7 @@ jobs:
       - name: Move files
         if: always()
         run: |
+          cd current
           mv *.py ../main/ || echo "not existing file" 
           mv *.md ../main/ || echo "not existing file" 
           mv data ../main/ || echo "not existing directory"  

@@ -41,6 +41,7 @@ jobs:
       - name: Copy files
         if: always()
         run: |
+          cd current
           cp *.py ../clean || echo "not existing file" 
           cp *.md ../clean || echo "not existing file" 
           cp -r data ../clean/ || echo "not existing directory" 
