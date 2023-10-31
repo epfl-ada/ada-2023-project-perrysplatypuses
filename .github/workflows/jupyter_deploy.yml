@@ -31,11 +31,14 @@ jobs:
           if [ -f *.ipynb ]; then
             python -m pip install jupyter nbconvert nbformat
             jupyter nbconvert --to notebook --execute *.ipynb --clear-output
+            mv *.ipynb ../main/
           fi
-          mv *.ipynb ../main/
-          mv *.py ../main/
-          mv *.md ../main/
-          mv data ../main/ || echo "not existing file" 
+      - name: Move files
+        if: always()
+        run: |
+          mv *.py ../main/ || echo "not existing file" 
+          mv *.md ../main/ || echo "not existing file" 
+          mv data ../main/ || echo "not existing directory"  
       - name: Commit updated notebook
         uses: EndBug/add-and-commit@v9
         with:
