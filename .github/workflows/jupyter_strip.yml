@@ -33,8 +33,10 @@ jobs:
         if: always()
         run: |
           cd current
-          python -m pip install jupyter nbconvert nbformat
-          jupyter nbconvert --clear-output --inplace *.ipynb
+          if [ -f *.ipynb ]; then
+            python -m pip install jupyter nbconvert nbformat
+            jupyter nbconvert --clear-output --inplace *.ipynb
+          fi
           cp *.ipynb ../clean
           cp *.py ../clean
           cp *.md ../clean

@@ -28,12 +28,14 @@ jobs:
       - name: Update analysis notebook
         run: |
           cd current
-          python -m pip install jupyter nbconvert nbformat
-          jupyter nbconvert --to notebook --execute *.ipynb --clear-output
+          if [ -f *.ipynb ]; then
+            python -m pip install jupyter nbconvert nbformat
+            jupyter nbconvert --to notebook --execute *.ipynb --clear-output
+          fi
           mv *.ipynb ../main/
           mv *.py ../main/
-          mv *.md ../clean
-          mv data ../clean/ || echo "not existing file" 
+          mv *.md ../main/
+          mv data ../main/ || echo "not existing file" 
       - name: Commit updated notebook
         uses: EndBug/add-and-commit@v9
         with:
