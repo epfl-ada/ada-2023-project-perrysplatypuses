@@ -12,6 +12,7 @@ List the additional dataset(s) you want to use (if any), and some ideas on how y
 
 
 **REMINDER**: 
+
 For submission:
 Readme.md file containing the detailed project proposal (up to 1000 words)
 Notebook containing initial analyses and data handling pipelines. We will grade the correctness, quality of code, and quality of textual descriptions.
