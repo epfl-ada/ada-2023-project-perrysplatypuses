@@ -24,6 +24,11 @@ jobs:
         with:
           ref: ${{ steps.extract_branch.outputs.branch }}-clean
           path: clean
+      - name: Setup git user
+        run: |
+            cd current
+            git config --global user.name "$(git --no-pager log --format=format:'%an' -n 1)"
+            git config --global user.email "$(git --no-pager log --format=format:'%ae' -n 1)"
       - name: Setup Python 
         if: always()
         uses: actions/setup-python@v4
