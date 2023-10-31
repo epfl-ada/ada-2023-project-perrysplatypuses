@@ -60,6 +60,6 @@ jobs:
         with:
           default_author: github_actions 
           message: "Update stripped Notebook"
-          add: "."
+          add: "./*"
           new_branch: ${{ steps.extract_branch.outputs.branch }}-clean
           cwd: "./current"
