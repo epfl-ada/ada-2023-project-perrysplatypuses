@@ -5,7 +5,7 @@ on:
     branches-ignore:
       - '*-clean' 
       - 'dev'
-      - 'master'
+      - 'main'
 
 jobs:
   check:
@@ -65,7 +65,7 @@ jobs:
         with:
           default_author: github_actions 
           message: "Update stripped Notebook"
-          add: "."
+          add: "./*"
           new_branch: ${{ steps.extract_branch.outputs.branch }}-clean
           cwd: "./clean"
       - name: commit updated notebook (new branch)
