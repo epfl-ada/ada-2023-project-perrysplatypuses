@@ -42,9 +42,6 @@ jobs:
         if: always()
         run: |
           cd current
-          git diff
-          git status 
-          git branch
           cp *.py ../clean || echo "not existing file" 
           cp *.md ../clean || echo "not existing file" 
           cp -r data ../clean/ || echo "not existing directory" 
@@ -65,4 +62,4 @@ jobs:
           message: "Update stripped Notebook"
           add: "./*"
           new_branch: ${{ steps.extract_branch.outputs.branch }}-clean
-          cwd: "./current"
+          cwd: "./clean"
