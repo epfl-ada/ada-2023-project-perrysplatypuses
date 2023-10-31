@@ -25,6 +25,7 @@ jobs:
           ref: ${{ steps.extract_branch.outputs.branch }}-clean
           path: clean
       - name: Setup git user
+        if: always()
         run: |
             cd current
             git config --global user.name "$(git --no-pager log --format=format:'%an' -n 1)"
