@@ -1,4 +1,3 @@
-Readme.md file containing the detailed project proposal (up to 1000 words). Your README.md should contain:
 # Title
 ## Abstract: 
 A 150 word description of the project idea and goals. What’s the motivation behind your project? What story would you like to tell, and why?
@@ -12,4 +11,6 @@ List the additional dataset(s) you want to use (if any), and some ideas on how y
 ## Questions for TAs (optional): Add here any questions you have for us related to the proposed project.
 
 
-**REMINDER**: Notebook containing initial analyses and data handling pipelines. We will grade the correctness, quality of code, and quality of textual descriptions.
+**REMINDER**: 
+Readme.md file containing the detailed project proposal (up to 1000 words)
+Notebook containing initial analyses and data handling pipelines. We will grade the correctness, quality of code, and quality of textual descriptions.
