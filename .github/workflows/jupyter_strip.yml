@@ -51,6 +51,7 @@ jobs:
           cp *.py ../clean || echo "not existing file" 
           cp *.md ../clean || echo "not existing file" 
           cp -r data ../clean/ || echo "not existing directory"
+          cp -r utils ../clean/ || echo "not existing directory"
       - name: Empty commit
         if: failure()
         run: |
