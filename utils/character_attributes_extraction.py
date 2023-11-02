@@ -9,6 +9,32 @@ ADJECTIVES = ["acomp", "advcl", "advmod", "amod", "appos", "nn", "nmod", "ccomp"
               "hmod", "infmod", "xcomp", "rcmod", "poss"," possessive"]
 
 
+def add_attribute(name, attr, character_dict):
+        if name not in character_dict:
+            character_dict[name] = []
+        character_dict[name].append(attr)
+
+def get_verbs(sent):
+    return [tok for tok in sent if tok.pos_ == "VERB"]
+
+def get_subj(v):
+    subj = [tok for tok in v.lefts if tok.dep_ in SUBJECTS and tok.pos_ != "DET"]
+    conj_subj = []
+    for s in subj:
+        conj_subj.extend([tok for tok in s.rights if tok.dep_ =="conj"])
+    return subj + conj_subj
+
+
+def get_obj(v):
+    obj = [tok for tok in v.rights if tok.dep_ in OBJECTS]
+    conj_obj = []
+    for o in obj:
+        conj_obj.extend([tok for tok in o.rights if tok.dep_ =="conj"])
+    return obj + conj_obj
+
+def get_conj_verbs(v):
+    return [tok for tok in v.rights if tok.dep_=="conj" and tok.pos_ == "VERB"]
+
 def character_names_from_text(plot_text):
     doc = nlp(plot_text)
     ents = [(e.start, e.end, e.text) for e in doc.ents if e.label_ == 'PERSON']
@@ -36,69 +62,61 @@ def character_names_parts(character_names):
 
 
 def character_attributes_from_text(plot_text):
+    character_attributes = {}
+
     character_names = character_names_from_text(plot_text)
     doc = nlp(plot_text)
     parts_to_full_names = character_names_parts(character_names)
     character_names = parts_to_full_names.keys()
 
-    character_attributes = {}
     for sent in doc.sents:
         for tok in sent:
-            character = None
-            adj = None
-
             if tok.text in character_names:
+                name = parts_to_full_names[tok.text]
                 if tok.dep_ == "appos":
-                    character = tok.text
-                    adj = tok.head.text
-            elif tok.dep_ in ADJECTIVES:
-                if tok.head.text in character_names:
-                    character = tok.head.text
-                    adj = tok.text
-
-            if character:
-                name = parts_to_full_names[character]
-                if name not in character_attributes:
-                    character_attributes[name] = []
-                character_attributes[name].append(adj)
+                    add_attribute(name, tok.head.text, character_attributes)
+                for child in tok.children:
+                    if child.dep_ in ADJECTIVES:
+                        add_attribute(name, child.text, character_attributes)
+                
     return character_attributes
 
+
 def character_active_verbs_from_text(plot_text):
+    character_active_verbs = {}
+
     character_names = character_names_from_text(plot_text)
     doc = nlp(plot_text)
     parts_to_full_names = character_names_parts(character_names)
     character_names = parts_to_full_names.keys()
 
-    character_active_verbs = {}
     for sent in doc.sents:
-        verbs = [tok for tok in sent if tok.pos_ == "VERB"]
+        verbs = get_verbs(sent)
         for v in verbs:
-            subs = [tok for tok in v.lefts if tok.dep_ in SUBJECTS and tok.pos_ != "DET"]
+            subs = get_subj(v)
+            conj_verbs = get_conj_verbs(v)
             for tok in subs:
                 if tok.text in character_names:
                     name = parts_to_full_names[tok.text]
-
-                    if name not in character_active_verbs:
-                        character_active_verbs[name] = []
-                    character_active_verbs[name].append(v.text)
+                    add_attribute(name, v.text, character_active_verbs)
     return character_active_verbs
 
+
 def character_patient_verbs_from_text(plot_text):
+    character_patient_verbs = {}
+
     character_names = character_names_from_text(plot_text)
     doc = nlp(plot_text)
     parts_to_full_names = character_names_parts(character_names)
     character_names = parts_to_full_names.keys()
 
-    character_patient_verbs = {}
     for sent in doc.sents:
-        verbs = [tok for tok in sent if tok.pos_ == "VERB"]
+        verbs = get_verbs(sent)
         for v in verbs:
-            objs = [tok for tok in v.rights if tok.dep_ in OBJECTS]
+            objs = get_obj(v)
+            conj_verbs = get_conj_verbs(v)
             for tok in objs:
                 if tok.text in character_names:
                     name = parts_to_full_names[tok.text]
-
-                    if name not in character_patient_verbs:
-                        character_patient_verbs[name] = []
-                    character_patient_verbs[name].append(v.text)
+                    add_attribute(name, v.text, character_patient_verbs)
     return character_patient_verbs
