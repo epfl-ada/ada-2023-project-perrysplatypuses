@@ -120,3 +120,27 @@ def character_patient_verbs_from_text(plot_text):
                     name = parts_to_full_names[tok.text]
                     add_attribute(name, v.text, character_patient_verbs)
     return character_patient_verbs
+
+
+def word2vec(w):
+    """ Get vector representation of the word """
+    return nlp(w).vector
+
+def attributes2vec(r):
+    """
+    Get vector representation for all the words attributes of the character.
+    Returns 3 arrays for ajectives, active verbs and patient verbs.
+    """
+    adj = []
+    active = []
+    patient = []
+    for w in r['adj']:        
+        if w:
+            adj.append(word2vec(w))
+    for w in r['active']:
+        if w:
+            active.append(word2vec(w))
+    for w in r['patient']:
+        if w:
+            patient.append(word2vec(w))
+    return adj, active, patient
