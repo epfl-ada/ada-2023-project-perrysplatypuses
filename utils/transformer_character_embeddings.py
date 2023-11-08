@@ -2,7 +2,7 @@ from transformers import AutoTokenizer, BertModel
 import torch
 from utils.character_attributes_extraction import character_names_from_text, character_names_parts
 
-def embeddings_from_text(plot_text):
+def embeddings_from_text(plot_text, pooling='mean'):
     """returns dict with embeddings for each character"""
     characters = character_names_parts(character_names_from_text(plot_text))
     sents = plot_text.split('. ')
@@ -31,13 +31,18 @@ def embeddings_from_text(plot_text):
 
             if name in characters:
                 if characters[name] in character_emb_dict:
-                    character_emb_dict[characters[name]] += temp_emb
+                    if pooling=='max':
+                        prev_emb = character_emb_dict[characters[name]]
+                        character_emb_dict[characters[name]] = torch.where(temp_emb>prev_emb, temp_emb, prev_emb)
+                    else:
+                        character_emb_dict[characters[name]] += temp_emb
                     character_count[characters[name]] += 1
                 else:
                     character_emb_dict[characters[name]] = temp_emb
                     character_count[characters[name]] = 1
 
-    # compute mean of all the embeddings for one character
-    for k in character_emb_dict.keys():
-        character_emb_dict[k] /= character_count[k]
+    if pooling=='mean':
+        # compute mean of all the embeddings for one character
+        for k in character_emb_dict.keys():
+            character_emb_dict[k] /= character_count[k]
     return character_emb_dict
