@@ -39,11 +39,12 @@ jobs:
         if: always()
         run: |
           cd current
-          if [ -f *.ipynb ]; then
+          for f in *.ipynb ; do
             python -m pip install jupyter nbconvert nbformat
             jupyter nbconvert --clear-output --inplace *.ipynb
             cp *.ipynb ../clean
-          fi
+            break
+          done
       - name: Copy files
         if: always()
         run: |
