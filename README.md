@@ -12,7 +12,7 @@ need to choose an appropriate one.
 https://docs.scipy.org/doc/scipy/reference/interpolate.html
 If we want to find optimized parameter, just need to sort ?
 ### regression
-if the model is simple linear model. The optimized point will be analyticaly found.
+if the model is simple model. The optimized point will be analyticaly found. But it will likeyly to on the boundary or known points.
 
 ### Gaussian Process Regression
 we can predict box plots of every points wiht mean and variance. So we can find good points where nobody tries and also it is high possibility of success.
