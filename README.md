@@ -16,6 +16,8 @@ if the model is simple model. The optimized point will be analyticaly found. But
 
 ### Gaussian Process Regression
 we can predict box plots of every points wiht mean and variance. So we can find good points where nobody tries and also it is high possibility of success.
+https://jamesbrind.uk/posts/2d-gaussian-process-regression/
+This site shows how to implement it for multi dimensions.
 
 ### notes
 need to limit the space for optimization. 　ex. each value of architypes vectors will be less than 5.
