@@ -19,4 +19,3 @@ This site shows how to implement it for multi dimensions.
 
 ### notes
 need to limit the space for optimization. 　ex. each value of architypes vectors will be less than 5.
-need to round values to integer after optimization.
