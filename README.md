@@ -1,4 +1,5 @@
 # Title
+As a movie director perspective, we want to find a good combination of character architypes.
 
 ## Methods(Analysis part)
 ### making vectors for each movie
@@ -7,12 +8,9 @@ If we have N architypes. Then each movies have vector of N+1 demensions. First N
 So those vectors will look like this (1,2,0,・・・,3,3594000)
 
 
-### Interpolation
-need to choose an appropriate one.
-https://docs.scipy.org/doc/scipy/reference/interpolate.html
-If we want to find optimized parameter, just need to sort ?
 ### regression
-if the model is simple model. The optimized point will be analyticaly found. But it will likeyly to on the boundary or known points.
+If the model is simple model. The optimized point will be analyticaly found. But it will likeyly to be on the boundary or known points.
+We want to add uncertainty to the model somehow for finding unknow points.
 
 ### Gaussian Process Regression
 we can predict box plots of every points wiht mean and variance. So we can find good points where nobody tries and also it is high possibility of success.
