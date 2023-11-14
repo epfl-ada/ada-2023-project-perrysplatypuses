@@ -25,6 +25,7 @@ jobs:
         run: |
           cd current
           python -m pip install --upgrade pip -r requirements.txt
+          python -m spacy download en_core_web_md
       - name: Update analysis notebook
         run: |
           cd current
