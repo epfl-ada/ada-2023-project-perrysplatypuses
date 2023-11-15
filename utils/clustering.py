@@ -7,7 +7,7 @@ from utils.transformer_character_embeddings import embeddings_from_text
 from utils.character_attributes_extraction import attributes2vec, word2vec
 
 from sklearn.decomposition import LatentDirichletAllocation
-from sklearn.cluster import AgglomerativeClustering
+from sklearn.cluster import AgglomerativeClustering, KMeans
 
 
 def get_transformer_embeddings(plots_with_cluster_labels, save_to=None):
@@ -31,20 +31,20 @@ def get_transformer_embeddings(plots_with_cluster_labels, save_to=None):
         character_df.to_csv("data/" + save_to)
     return character_df
 
-def get_trf_clusters(characters, n_clusters):
+def get_trf_clusters(characters, algo):
     X = np.array(characters['emb'].values.tolist())
-    clustering = AgglomerativeClustering(n_clusters=n_clusters, metric='euclidean', linkage='complete').fit(X)
+    clustering = algo.fit(X)
     return clustering.labels_
 
 
 def sort_meaningful(characters, min_attr_length):
     def len_attr(x):
         a = 0
-        for w in x["adj"][0]:
+        for w in x["adj"]:
             a += w.isalpha()
-        for w in x["active"][0]:
+        for w in x["active"]:
             a += w.isalpha()
-        for w in x["patient"][0]:
+        for w in x["patient"]:
             a += w.isalpha()
         return a
 
@@ -129,12 +129,29 @@ def lda_clustering(topic_count, n_components, random_state=0):
     ).fit_transform(topic_count)
     return lda.argmax(axis=1)
 
+def kmeans_clustering(topic_count, n_components, random_state=0):
+    kmeans = KMeans(
+        n_clusters=n_components, random_state=random_state
+    ).fit_predict(topic_count)
+    return kmeans
 
 def get_lda_clusters(
-    characters, min_freq, max_freq, clustering_algo, n_components
+    characters, min_freq, max_freq, clustering_algo, n_components, return_topic_counts=False
 ):
     topic_count = get_topic_counts(
         characters, min_freq, max_freq, clustering_algo
     )
     print('LDA')
+    if return_topic_counts:
+        return lda_clustering(topic_count, n_components), topic_count
     return lda_clustering(topic_count, n_components)
+
+
+def get_kmeans_clusters(
+    characters, min_freq, max_freq, clustering_algo, n_components
+):
+    topic_count = get_topic_counts(
+        characters, min_freq, max_freq, clustering_algo
+    )
+    print('KMeans')
+    return kmeans_clustering(topic_count, n_components)
