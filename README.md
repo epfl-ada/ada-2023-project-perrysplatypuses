@@ -1,9 +1,7 @@
 # Title
 ## Abstract: 
-A 150 word description of the project idea and goals. What’s the motivation behind your project? What story would you like to tell, and why?
 
-As humans, we tend to divide everything we see into the categories. It's also true for the charactes in the movies we see. Actors and movie-makers can utilize this knowledge to their advantage. We want to use the data-driven approach to obtain the clusters of the movie characters which we call archetypes and use this archetypes to gain meaningful insights about peoples characters preference.
-
+In our daily lives, we naturally categorize everything we encounter, including the characters in the movies we love. Our goal is to employ a data-driven approach to find clusters of movie characters or archetypes. By using these archetypes, we aim to uncover valuable insights into people's preferences for character traits. Using this knowledge, we can not only help movie creators but also look into the prevailing cultural, social, and psychological dynamics.
 
 ## Research Questions: 
 - Which clusters can we obtain from the plots of the movies?
