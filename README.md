@@ -9,8 +9,9 @@ In our daily lives, we naturally categorize everything we encounter, including t
 - Is there a difference in prefered archetypes based on the country of production?
 - What are the historical trends in preffered archetypes?
 
-## Proposed additional datasets (if any): 
-List the additional dataset(s) you want to use (if any), and some ideas on how you expect to get, manage, process, and enrich it/them. Show us that you’ve read the docs and some examples, and that you have a clear idea on what to expect. Discuss data size and format if relevant. It is your responsibility to check that what you propose is feasible.
+## Proposed additional datasets: 
+[World Bank CPI](https://data.worldbank.org/indicator/FP.CPI.TOTL.ZG?end=2012&start=1990&view=chart) - we will use this dataset to account for inflation and be able to fairly compare the revenues form different years
+[IMDB Movies](https://developer.imdb.com/non-commercial-datasets/) - we will use this dataset to add movies rating to the succes measure of the film and possibly to extracting additional data about the actors.
 
 ## Methods
 1) Clustering the data
