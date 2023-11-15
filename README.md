@@ -6,14 +6,9 @@ As humans, we tend to divide everything we see into the categories. It's also tr
 
 
 ## Research Questions: 
-From the actor's perspective:
-- Should you stick to only one archetype, or should you try to switch archetypes frequently?
-- Which archetypes would suit you the most given your characteristics (age, sex, etc.)?
-
-From the script writer's perspective:
-- Which combinations of archetypes would appeal to your target audience?
-    - Taking into consideration the country where you want to show your film
-    - Taking into consideration the genre of your film
+- Which clusters can we obtain from the plots of the movies?
+- Should actors stick to only one archetype, or should they try to switch archetypes frequently in order to be successful?
+- Which combinations of archetypes in the film would appeal to the audience? How does it depend on the genre and the country of production?
 - What are the historical trends?
 
 ## Proposed additional datasets (if any): 
