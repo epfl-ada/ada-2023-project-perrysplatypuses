@@ -8,7 +8,8 @@ As humans, we tend to divide everything we see into the categories. It's also tr
 ## Research Questions: 
 - Which clusters can we obtain from the plots of the movies?
 - Should actors stick to only one archetype, or should they try to switch archetypes frequently in order to be successful?
-- Which combinations of archetypes in the film would appeal to the audience? How does it depend on the genre and the country of production?
+- Which combinations of archetypes in the film would appeal to the audience? How does it depend on the genre
+- Is there a difference in prefered archetypes based on the country of production?
 - What are the historical trends?
 
 ## Proposed additional datasets (if any): 
