@@ -40,22 +40,25 @@ In order to leverage the knowledge of archetypes and determine the role of diffe
 ## Proposed timeline
 17-11 
 - Proof of concept (P2 deadline)
--- Clustering
--- Initial analysis of actors' success
+ - Clustering
+ - Initial analysis of actors' success
+ - Archetypes distribuion by actors' age and sex
+ - Achetypes distribution by genres
 
 24-11 
 - Final success evaluation
--- Adjust revenue data for inflation
--- Add ratings to the success metrics
+ - Adjust revenue data for inflation
+ - Add ratings to the success metrics
 - Basic analysis of archetypes
--- Achetypes distribution by genres
--- Historical trends in archetypes
+ - Geographycal trends in archetypes
+ - Historical trends in archetypes
 
 01-12
 - Answer the research questions
 
 08-12 
 - Clean the code
+- Clean the textual description
 
 15-12 
 - Draft Data Story
@@ -64,12 +67,13 @@ In order to leverage the knowledge of archetypes and determine the role of diffe
 - Final Data Story (P3 deadline)
 
 ## Organization within the team: A list of internal milestones up until project Milestone P3.
+|        |                           Tasks|
+|--------|--------------------------------|
+|Jiasheng|Initial actor's success analysis|
+|   Edvin|                                |
+|    Rita|                      Clustering|
+|   Naoki|                                |
+| Mikhail|                                |
 
 ## Questions for TAs (optional): Add here any questions you have for us related to the proposed project.
 
-
-**REMINDER**: 
-
-For submission:
-Readme.md file containing the detailed project proposal (up to 1000 words)
-Notebook containing initial analyses and data handling pipelines. We will grade the correctness, quality of code, and quality of textual descriptions.
