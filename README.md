@@ -1,7 +1,7 @@
 # Title
 ## Abstract: 
 
-In our daily lives, we naturally categorize everything we encounter, including the characters in the movies we love. Our goal is to employ a data-driven approach to find clusters of movie characters or archetypes. By using these archetypes, we aim to uncover valuable insights into people's preferences for character traits. Using this knowledge, we can not only help movie creators but also look into the prevailing cultural, social, and psychological dynamics.
+In our daily lives, we naturally categorize everything we encounter, including the characters in the movies we love. The goal of this project is to employ a data-driven approach to find clusters of movie characters or archetypes. By using these archetypes, we aim to uncover valuable insights into people's preferences for character traits. Using this knowledge, we can not only help movie creators but also look into the prevailing cultural, social, and psychological dynamics.
 
 ## Research Questions: 
 - Which actors are more succesfull: those who stick to only one archetype, or those who switch archetypes frequently?
