@@ -40,18 +40,18 @@ In order to leverage the knowledge of archetypes and determine the role of diffe
 ## Proposed timeline
 17-11 
 - Proof of concept (P2 deadline)
- * Clustering
- * Initial analysis of actors' success
- * Archetypes distribuion by actors' age and sex
- * Achetypes distribution by genres
+  * Clustering
+  * Initial analysis of actors' success
+  * Archetypes distribuion by actors' age and sex
+  * Achetypes distribution by genres
 
 24-11 
 - Final success evaluation
- * Adjust revenue data for inflation
- * Add ratings to the success metrics
+  * Adjust revenue data for inflation
+  * Add ratings to the success metrics
 - Basic analysis of archetypes
- * Geographycal trends in archetypes
- * Historical trends in archetypes
+  * Geographycal trends in archetypes
+  * Historical trends in archetypes
 
 01-12
 - Answer the research questions
