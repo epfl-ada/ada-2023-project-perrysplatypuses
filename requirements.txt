@@ -7,5 +7,3 @@ statsmodels==0.12.2
 tqdm
 transformers
 spacy
-scikit-learn
-torch
