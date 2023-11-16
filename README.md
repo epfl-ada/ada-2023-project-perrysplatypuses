@@ -7,10 +7,10 @@ In our daily lives, we naturally categorize everything we encounter, including t
 - Which combinations of archetypes in the film appeal to the audience? How does it depend on the genre of the film?
 - Is there a difference in preferred archetypes based on the country of production?
 - What are the historical trends in preferred archetypes?
-- Which actors are more succesfull: those who stick to only one archetype, or those who switch archetypes frequently? Does this chacnge over time?
+- Which actors are more succesfull: those who stick to only one archetype, or those who switch archetypes frequently? Does this change over time?
 
 ## Proposed additional datasets: 
-[World Bank CPI](https://data.worldbank.org/indicator/FP.CPI.TOTL.ZG?end=2012&start=1990&view=chart) - we will use this dataset to account for inflation and be able to fairly compare the revenues form different years.
+[U.S. Bureau of Labor Statistics CPI](https://www.bls.gov/cpi/data.htm) - we will use this dataset to account for inflation and be able to fairly compare the revenues form different years. We can adjust revenues for inflation using formula $adjusted value = \frac{actual value}{CPI} \cdot 100$, where $CPI$ is Consumer Price Index. We are using U.S. CPI (U.S. city average, All items CUUR0000SA0) data, since revenue is stated in USD.
 
 [IMDB Movies](https://developer.imdb.com/non-commercial-datasets/) - we will use this dataset to add movies rating to the succes measure of the film and possibly to extracting additional data about the actors.
 
