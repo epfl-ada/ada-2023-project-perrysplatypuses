@@ -20,7 +20,7 @@ In our daily lives, we naturally categorize everything we encounter, including t
  Clustering is a crucial step in our analysis. We follow the idea suggested in the paper [Learning Latent Personas of Film Characters](https://developer.imdb.com/non-commercial-datasets/) to extract information about character archetypes from the plot text. We implement two methods: Latent Dirichlet Allocation (LDA)-based and BERT-based clustering.
 
 Latent Dirichlet Allocation-based clustering:
-- extract linguistic features for each character using spicy
+- extract linguistic features for each character using `spacy`
 - use word2vec embeddings to cluster these features into topics using Agglomerative Clustering,
 - perform Latent Dirichlet Allocation to cluster characters based on their feature topics.
   
