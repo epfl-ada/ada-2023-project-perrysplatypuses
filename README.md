@@ -1,45 +1,48 @@
 # Cinematic Archetypes: Decoding Societal Preferences
 ## Abstract: 
 
-In our daily lives, we naturally categorize everything we encounter, including the characters in the movies we love. The characters that capture our collective imagination often mirror our aspirations, fears, and evolving values. The goal of this project is to employ a data-driven approach to cluster movie characters into archetypes. By using these archetypes, we aim to uncover valuable insights into people's preferences for character traits. Using this knowledge, we can not only help filmmakers to create more appealing stories, but also look into the prevailing cultural and psychological dynamics in the society.
+In our daily lives, we naturally categorize everything we encounter, including the characters in the movies we love. The characters that capture our collective imagination often mirror our aspirations, fears, and evolving values. This project aims to employ a data-driven approach to cluster movie characters into archetypes. By using these archetypes, we aim to uncover valuable insights into people's preferences for character traits. Using this knowledge, we can not only help filmmakers to create more appealing stories but also look into the prevailing cultural and psychological dynamics in society.
 
 ## Research Questions: 
-- Which combinations of archetypes in the film appeal to the audience? How does it depend on the genre of the film?
-- Is there a difference in preferred archetypes based on the country of production?
+- What character archetypes can we derive, and what methodologies are most effective for this purpose?
 - What are the historical trends in preferred archetypes?
-- Which actors are more succesfull: those who stick to only one archetype, or those who switch archetypes frequently? Does this change over time?
+- Is there a difference in preferred archetypes based on the country of production?
+- Which combinations of archetypes in the film appeal to the audience? How does it depend on the genre of the film?
+- Which actors are more successful: those who stick to only one archetype, or those who switch archetypes frequently? Does this change over time? As success metrics, we will use box office revenues and movie ratings.
 
 ## Proposed additional datasets: 
-[U.S. Bureau of Labor Statistics CPI](https://www.bls.gov/cpi/data.htm) - we will use this dataset to account for inflation and be able to fairly compare the revenues form different years. We can adjust revenues for inflation using formula $Adjusted Value = \frac{Actual Value}{CPI} \cdot 100$, where $CPI$ is Consumer Price Index. We are using U.S. CPI (U.S. city average, All items CUUR0000SA0) data, since revenue is stated in USD.
+[U.S. Bureau of Labor Statistics CPI](https://www.bls.gov/cpi/data.htm) - we will use this dataset to account for inflation and be able to compare the revenues form different years fairly. We can adjust revenues for inflation using the formula $Adjusted Value = \frac{Actual Value}{CPI} \cdot 100$, where $CPI$ is the Consumer Price Index. We are using U.S. CPI (U.S. city average, All items CUUR0000SA0) data since revenue is stated in USD.
 
-[IMDB Movies](https://developer.imdb.com/non-commercial-datasets/) - we will use this dataset to add movies ratings (`averageRating`) to the succes measure of films and, possibly, to extract additional data about the actors. We will merge movies by `title`, `runtimeMinutes` and `startYear` (release year).
+[IMDB Movies](https://developer.imdb.com/non-commercial-datasets/) - we will use this dataset to add movie ratings (`averageRating`) to the success measure of films and, possibly, to extract additional data about the actors. We will merge movies by `title`, `runtimeMinutes`, and `startYear` (release year).
 
 ## Methods
 #### Step 1: Clustering the data
- Clustering is a crucial step in our analysis. We follow the idea suggested in the paper [Learning Latent Personas of Film Characters](https://developer.imdb.com/non-commercial-datasets/) to extrat information about character archetypes from the plot text. We implemet two methods: Latent Dirichlet Allocation (LDA)-based and BERT-based clustering.
+ Clustering is a crucial step in our analysis. We follow the idea suggested in the paper [Learning Latent Personas of Film Characters](https://developer.imdb.com/non-commercial-datasets/) to extract information about character archetypes from the plot text. We implement two methods: Latent Dirichlet Allocation (LDA)-based and BERT-based clustering.
 
 Latent Dirichlet Allocation-based clustering:
 - extract linguistic features for each character (attributes, active and patient verbs),
-- use word2vec embeddings to cluster this features into topics using Agglomerative Clustering,
-- perform Latent Dirichlet Allocation to cluster characters based of their features topics.
+- use word2vec embeddings to cluster these features into topics using Agglomerative Clustering,
+- perform Latent Dirichlet Allocation to cluster characters based on their feature topics.
   
-BERT-based clustering (refere to `utils/archive/transformer_embeddings.ipynb` for the pipeline):
-- obtain character's embedding as the mean of the pretrained BERT embeddings of character's name tokens in the text of the plot,
-- performe clustering (Agglomerative or KMeans) using this embeddings.
+BERT-based clustering (refer to `utils/archive/transformer_embeddings.ipynb` for the pipeline):
+- obtain the character's embedding as the mean of the pre-trained BERT embeddings of the character's name tokens in the text of the plot,
+- perform clustering (Agglomerative or KMeans) using these embeddings.
 
-Then we compare the quality of our clustering methods with the quality of the clustering proposed in the paper "Learning Latent Personas of Film Characters". The performance of our clustering methods is better when comparing Variation of Information between learned clusters and gold clusters extracted from TV Tropes ([refer](http://www.cs.cmu.edu/~dbamman/pubs/pdf/bamman+oconnor+smith.acl13.pdf) to the paper for the details). And since the performane of BERT-based method is not much better than the performance of LDA-based method, we will use LDA-based clustering for our analysis, because it's much faster.
+Then we compare the quality of our clustering methods with the quality of the clustering proposed in the paper "Learning Latent Personas of Film Characters". The performance of our clustering methods is better when comparing Variation of Information between learned clusters and gold clusters extracted from TV Tropes ([refer](http://www.cs.cmu.edu/~dbamman/pubs/pdf/bamman+oconnor+smith.acl13.pdf) to the paper for the details). And since the performance of the BERT-based method is not much better than the performance of the LDA-based method, we will use LDA-based clustering for our analysis, because it's much faster.
 
-After that, we fix the clustering algorithm and search for the best number of cluster for our later analysis using Within-Cluster Sum of Squares.
+After that, we fix the clustering algorithm and search for the best number of clusters for our later analysis using Within-Cluster Sum of Squares.
 ###### Interpretability
-Latent Dirichlet Allocation can help in interpreting obtained clusters. We can look at the components of the model to find the top topics (clusters of words) which can help in understanding which characters' traints are related to being in the particular cluster.
+Latent Dirichlet Allocation can help in interpreting obtained clusters. We can look at the model's components to find the top topics (clusters of words) which can help in understanding which characters' traits are related to being in the particular cluster.
 
-#### Step 2: Evaluating success of an actor
-In order to leverage the knowledge of archetypes and determine the role of different archetypes in the succes of the movie or the role of the archetypes played by one actor, we need to construct the success metrics for the movie and actors. We can use the revenue or IMDB rating to ecaluate the movie success, but it's not that simple for the actor's succes. We propose using the weighted average of the revenues/rating of the movies in which the actor played, whith weights proportional to the importance of the role. Importance of the role can be evaluated by the number of linguistic features connected to the particular character (which we extracted in the previous step). If the character has a lot of features, they must be an important character.
+#### Step 2: Evaluating the success of an actor
+In order to leverage the knowledge of archetypes and determine the role of different archetypes in the success of the movie or the role of the archetypes played by one actor, we need to construct the success metrics for the movie and actors. We can use the revenue or IMDB rating to evaluate the movie's success, but it's not that simple for the actor's success. We propose using the weighted average of the revenues/rating of the movies in which the actor played, with weights proportional to the importance of the role. 
+
+The importance of the role can be evaluated by the number of linguistic features connected to the particular character (which we extracted in the previous step). If the character has a lot of features, they must be an important character.
 
 #### Step 3: Answering research questions
-We propose using Linear regression to understand the influence of the particular archetype on the success of the movie. By fitting the model to predict the revenue / rating of the movie based on the archetypes present in the movie we can find statistically significant coeficients, indicating the influence of the archetypes or their interaction on the success of the movie.
+We propose using Linear regression to understand the influence of the particular archetype on the success of the movie. By fitting the model to predict the revenue/rating of the movie based on the archetypes present in the movie we can find statistically significant coefficients, indicating the influence of the archetypes or their interaction on the success of the movie.
 
-We will perform hypothesis testing to uncover the difference in preffered archetypes in different countries using Pearson’s Chi-Square test (`chi2_contingency` from `scipy.stats`).
+We will perform hypothesis testing to uncover the difference in preferred archetypes in different countries using Pearson’s Chi-Square test (`chi2_contingency` from `scipy.stats`).
 
 ## Proposed timeline
 17-11 
@@ -56,7 +59,7 @@ We will perform hypothesis testing to uncover the difference in preffered archet
 
 01-12
 - Basic analysis of archetypes
-  * Geographycal trends in archetypes
+  * Geographical trends in archetypes
   * Historical trends in archetypes
 
 08-12 
