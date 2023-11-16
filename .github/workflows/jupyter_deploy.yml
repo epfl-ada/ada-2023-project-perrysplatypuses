@@ -25,22 +25,26 @@ jobs:
         run: |
           cd current
           python -m pip install --upgrade pip -r requirements.txt
+          python -m spacy download en_core_web_md
       - name: Update analysis notebook
         run: |
           cd current
-          if [ -f *.ipynb ]; then
+          for f in *.ipynb ; do
             python -m pip install jupyter nbconvert nbformat
             jupyter nbconvert --to notebook --execute *.ipynb --clear-output
             mv *.ipynb ../main/
-          fi
+            break
+          done
       - name: Move files
         if: always()
         run: |
           cd current
           mv *.py ../main/ || echo "not existing file" 
-          mv *.md ../main/ || echo "not existing file" 
-          mv data ../main/ || echo "not existing directory"  
-          mv utils ../main/ || echo "not existing directory"
+          mv *.md ../main/ || echo "not existing file"
+          mkdir ../main/data || echo "dir exist"
+          mkdir ../main/utils || echo "dir exist"
+          mv data/* ../main/data/ || echo "not existing directory"  
+          mv utils/* ../main/utils/ || echo "not existing directory"
       - name: Commit updated notebook
         uses: EndBug/add-and-commit@v9
         with:
