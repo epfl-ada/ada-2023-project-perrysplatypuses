@@ -8,3 +8,4 @@ tqdm
 transformers
 spacy
 scikit-learn
+torch
