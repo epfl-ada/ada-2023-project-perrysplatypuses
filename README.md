@@ -75,9 +75,7 @@ Linear regression to investigate the impact of specific archetypes on movie succ
  - Clusters interpretation
 
 :clock5: 01-12
-- Basic analysis of archetypes (step 2)
-  * Geographical trends in archetypes
-  * Historical trends in archetypes
+- Analysis of archetypes (step 2)
 
 :clock7: 08-12 
 - Finalize answers to the research questions
@@ -99,6 +97,3 @@ Linear regression to investigate the impact of specific archetypes on movie succ
 |    Rita|          Step 1 and code review |
 |   Naoki|Step 4 and assisting in Steps 2&3|
 | Mikhail|         Step 2 and Data Story   |
-
-## Questions for TAs (optional): Add here any questions you have for us related to the proposed project.
-
