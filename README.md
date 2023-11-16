@@ -1,13 +1,13 @@
 # Title
 ## Abstract: 
 
-In our daily lives, we naturally categorize everything we encounter, including the characters in the movies we love. The goal of this project is to employ a data-driven approach to find clusters of movie characters or archetypes. By using these archetypes, we aim to uncover valuable insights into people's preferences for character traits. Using this knowledge, we can not only help filmmakers to create more appealing stories, but also look into the prevailing cultural and psychological dynamics in the society.
+In our daily lives, we naturally categorize everything we encounter, including the characters in the movies we love. The characters that capture our collective imagination often mirror our aspirations, fears, and evolving values. The goal of this project is to employ a data-driven approach to cluster movie characters into archetypes. By using these archetypes, we aim to uncover valuable insights into people's preferences for character traits. Using this knowledge, we can not only help filmmakers to create more appealing stories, but also look into the prevailing cultural and psychological dynamics in the society.
 
 ## Research Questions: 
-- Which actors are more succesfull: those who stick to only one archetype, or those who switch archetypes frequently?
 - Which combinations of archetypes in the film appeal to the audience? How does it depend on the genre of the film?
 - Is there a difference in preferred archetypes based on the country of production?
 - What are the historical trends in preferred archetypes?
+- Which actors are more succesfull: those who stick to only one archetype, or those who switch archetypes frequently? Does this chacnge over time?
 
 ## Proposed additional datasets: 
 [World Bank CPI](https://data.worldbank.org/indicator/FP.CPI.TOTL.ZG?end=2012&start=1990&view=chart) - we will use this dataset to account for inflation and be able to fairly compare the revenues form different years.
