@@ -71,10 +71,10 @@ def get_vocab(characters, min_freq, max_freq):
             if w.isalpha()
         ]
     )
-    vocab, vocab_count = np.unique(vocab, return_counts=True)
-    
     # we use relative max_freq
     max_freq = int(max_freq * len(vocab))
+
+    vocab, vocab_count = np.unique(vocab, return_counts=True)
 
     vocab = vocab[np.logical_and(vocab_count >= min_freq, vocab_count <= max_freq)]
     vocab_vectors = [word2vec(w).tolist() for w in vocab.tolist()]
@@ -87,7 +87,8 @@ def word_topics_clustering(vocab, vocab_vectors, clustering_algo):
 
     topic_dict = {}
     for i in tqdm(range(len(vocab))):
-        topic_dict[vocab[i]] = labels[i]
+        if labels[i] > -1:
+            topic_dict[vocab[i]] = labels[i]
     return topic_dict
 
 
