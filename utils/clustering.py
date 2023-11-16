@@ -37,17 +37,15 @@ def get_trf_clusters(characters, algo):
     return clustering.labels_
 
 
-def sort_meaningful(characters, min_attr_length, min_freq, max_freq):
-    vocab, vocab_vectors = get_vocab(characters, min_freq, max_freq)
-
+def sort_meaningful(characters, min_attr_length):
     def len_attr(x):
         a = 0
         for w in x["adj"]:
-            a += w in vocab
+            a += w.isalpha()
         for w in x["active"]:
-            a += w in vocab
+            a += w.isalpha()
         for w in x["patient"]:
-            a += w in vocab
+            a += w.isalpha()
         return a
 
     return (
