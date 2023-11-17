@@ -63,11 +63,11 @@ Linear regression to investigate the impact of specific archetypes on movie succ
 :clock1: 17-11 
 - Proof of concept (P2 deadline)
   * Clustering
-  * Archetypes analysis by genres
   * Initial analysis of actors' success
   * Initial linear regression model to investigate the impact of specific archetypes on movie success
 
 :clock3: 24-11 
+- Archetypes analysis by genres
 - Movie success evaluation
   * Adjust revenue data for inflation
   * Add ratings to the success metrics
