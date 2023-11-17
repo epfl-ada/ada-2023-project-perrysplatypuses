@@ -25,14 +25,16 @@ jobs:
         run: |
           cd current
           python -m pip install --upgrade pip -r requirements.txt
+          python -m spacy download en_core_web_md
       - name: Update analysis notebook
         run: |
           cd current
-          if [ -f *.ipynb ]; then
+          for f in *.ipynb ; do
             python -m pip install jupyter nbconvert nbformat
             jupyter nbconvert --to notebook --execute *.ipynb --clear-output
             mv *.ipynb ../main/
-          fi
+            break
+          done
       - name: Move files
         if: always()
         run: |
