@@ -5,7 +5,7 @@ def get_imdb_ratings(chunksize=None):
     if chunksize is None:
         imdb_titles = pd.read_csv('data/IMDB/titles.tsv', sep='\t', low_memory=False)
     else:
-        imdb_titles = next(pd.read_csv('data/IMDB/titles.tsv', sep='\t', chunksize=chunksize))
+        imdb_titles = next(pd.read_csv('data/IMDB/titles.tsv', sep='\t', low_memory=False, chunksize=chunksize))
 
     imdb_titles = imdb_titles[(imdb_titles['titleType'] == 'movie')].reset_index(drop=True)
     imdb_titles = imdb_titles[imdb_titles['startYear'].apply(lambda x: x!= '\\N' and int(x) < 2013)]
