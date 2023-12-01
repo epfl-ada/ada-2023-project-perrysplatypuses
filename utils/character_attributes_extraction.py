@@ -59,9 +59,16 @@ def character_names_from_text(plot_text):
     ents = [(e.start, e.end, e.text) for e in doc.ents if e.label_ == "PERSON"]
     character_names = set()
     for i in range(len(ents)):
-        t = doc[ents[i][0]]
-        if t.pos_ == "PROPN":
+        full_name = True
+        for j in range(ents[i][0], ents[i][1]):
+            t = doc[j]
+            if t.pos_ == "PROPN" and t.text.isalpha():
+                character_names.add(t.text)
+            else:
+                full_name = False
+        if full_name:
             character_names.add(ents[i][2])
+            
 
     ents = character_names.copy()
     for e in ents:
