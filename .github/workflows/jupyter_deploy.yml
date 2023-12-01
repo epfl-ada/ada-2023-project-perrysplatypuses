@@ -41,8 +41,8 @@ jobs:
           cd current
           mv *.py ../main/ || echo "not existing file" 
           mv *.md ../main/ || echo "not existing file" 
-          mv data ../main/ || echo "not existing directory"  
-          mv utils ../main/ || echo "not existing directory"
+          cp -r data ../main/ || echo "not existing directory"  
+          cp -r utils ../main/ || echo "not existing directory"
       - name: Commit updated notebook
         uses: EndBug/add-and-commit@v9
         with:
