@@ -1,5 +1,8 @@
 # Cinematic Archetypes: Decoding Societal Preferences
-The main notebook containing the initial analysis is `milestone_p2.ipynb`.
+Datastory [link](https://ris-iris.github.io/ada-project-website/).
+
+The main notebook is `milestone3.ipynb`.
+
 ## Abstract: 
 
 In our daily lives, we naturally categorize everything we encounter, including the characters in the movies we love. The characters that capture our collective imagination often mirror our aspirations, fears, and evolving values. This project aims to employ a data-driven approach to cluster movie characters into archetypes. By using these archetypes, we aim to uncover valuable insights into people's preferences for character traits. Using this knowledge, we can not only help filmmakers to create more appealing stories but also look into the prevailing cultural and psychological dynamics in society.
