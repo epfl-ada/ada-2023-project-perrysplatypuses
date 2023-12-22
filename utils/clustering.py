@@ -2,6 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 from tqdm import tqdm
+import json
 
 from utils.transformer_character_embeddings import embeddings_from_text
 from utils.character_attributes_extraction import attributes2vec, word2vec
