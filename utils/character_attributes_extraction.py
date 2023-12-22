@@ -171,3 +171,38 @@ def attributes2vec(r):
         if w:
             patient.append(word2vec(w))
     return adj, active, patient
+
+def attributes_extraction(
+        path_to_plots = 'data/MovieSummaries/plot_summaries.txt'
+):
+    
+    plots =  pd.read_csv(
+    path_to_plots, 
+    sep='\t', 
+    names=['wiki_id', 'plot']
+    )
+
+    plots['plot'] = plots['plot'].apply(lambda x: ' '.join(x.split()))
+    character_list = []
+
+# for every plot we find characters and their dependencies in 3 groups: attributes, active verbs and patient verbs and save it to csv file
+    for index, row in tqdm([row for row in plots.iterrows()]):
+        plot = row['plot'] 
+        character_names = character_names_from_text(plot)
+        character_attributes = character_attributes_from_text(plot)
+        character_active_verbs = character_active_verbs_from_text(plot)
+        character_patient_verbs = character_patient_verbs_from_text(plot)
+        for name in character_names:
+            character_list.append(
+                {
+                    'wiki_id': row['wiki_id'],
+                    'character': name,
+                    'adj': character_attributes.get(name, []),
+                    'active': character_active_verbs.get(name, []),
+                    'patient': character_patient_verbs.get(name, []),
+                }
+            )
+
+    character_df = pd.DataFrame(character_list)
+    character_df.to_csv('data/character_attributes.csv')
+    character_df[character_df['active'].map(len)>5]
