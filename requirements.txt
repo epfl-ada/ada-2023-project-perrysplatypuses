@@ -9,3 +9,5 @@ transformers
 spacy
 scikit-learn
 torch
+plotly
+
