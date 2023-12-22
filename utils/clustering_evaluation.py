@@ -69,5 +69,28 @@ def get_characters_with_tv_trop_info(characters, return_golgen_clusters=True):
         return characters_to_check, group_labels_by_clusters(characters_to_check['trope'].values)
     return characters_to_check
 
+def medoid(vec):
+    dist_matrix = np.zeros((len(vec), len(vec)))
+    for i in range(len(vec)):
+        for j in range(i + 1, len(vec)):
+            dist_matrix[i][j] = np.sum(np.abs(vec[i] - vec[j]))
+            dist_matrix[j][i] = dist_matrix[i][j]
+    argmin = np.argmin(np.sum(dist_matrix, axis=0))
+    return vec[argmin]
+
+def unsupervised_evaluation(features, labels):
+    unique_labels = np.unique(labels)
+    # Calculate cluster medoid
+    cluster_medoids = np.array([medoid(features[labels == label]) for label in unique_labels])
+
+    # Calculate within-cluster sum of squares (WSS)
+    wss = 0
+    for num, label in enumerate(unique_labels):
+        distance = np.sum((features[labels == label] - cluster_medoids[num]) ** 2)
+        wss += distance
+
+    sil_score = metrics.silhouette_score(features, labels)
+    return wss, sil_score
+
 
     
