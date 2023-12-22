@@ -38,20 +38,17 @@ After that, we fix the clustering algorithm and search for the best number of cl
 
 <!---
 ###### Interpretability
-Latent Dirichlet Allocation can help in interpreting obtained clusters. We can look at the model's components to find the top topics (clusters of words) which can help in understanding which characters' traits are related to being in the particular cluster.
+Latent Dirichlet Allocation can help in interpreting obtained clusters. We can look at the model's components to find the top topics (clusters of words) which can help us understand which characters' traits are related to being in the particular cluster.
 --->
 
 #### Step 2: Archetypes analysis: what trends and patterns could we observe
 
 In this step, we will analyze clusters from the previous step in the following dimensions
-- Genre dimension. Do archetypes correspond to the specific genres and how informative are the combinations of archetypes for the definition of the movie genre?
 - Time dimension. What time trends could we observe in the archetype distribution?
 - Geographical and ethnic dimension. Do the movie languages and countries affect archetype distribution? If so, what cultural patterns could we reveal from archetype preferences?
-  - Conduct hypothesis testing to discern variations in preferred archetypes across different countries.
-  - Employ Pearson’s Chi-Square test (chi2_contingency from scipy.stats) for statistical analysis.
 
 #### Step 3: Determine the role of different archetypes in the success of the movie
-In order to leverage the knowledge of archetypes and determine the role of different archetypes in the success of the movie or the role of the archetypes played by one actor, we need to construct the success metrics for the movie and actors. 
+To leverage the knowledge of archetypes and determine the role of different archetypes in the success of the movie or the role of the archetypes played by one actor, we need to construct the success metrics for the movie and actors. 
 
 We can use the revenue or IMDB rating to evaluate the movie's success, but it's not that simple for the actor's success. We propose using the weighted average of the revenues/ratings of the movies in which the actor played, with weights proportional to the importance of the role. 
 The importance of the role can be evaluated by the number of linguistic features connected to the particular character (which we extracted in the previous step). If the character has a lot of features, they must be an important character.
@@ -63,41 +60,13 @@ Linear regression to investigate the impact of specific archetypes on movie succ
  - Fit the model to predict movie revenue/rating based on the archetypes present.
  - Identify statistically significant coefficients, providing insights into the influence of archetypes or their interactions on movie success.
 
-## Proposed timeline
-:clock1: 17-11 
-- Proof of concept (P2 deadline)
-  * Clustering
-  * Initial analysis of actors' success
-  * Initial linear regression model to investigate the impact of specific archetypes on movie success
 
-:clock3: 24-11 
-- Archetypes analysis by genres
-- Movie success evaluation
-  * Adjust revenue data for inflation
-  * Add ratings to the success metrics
- - Archetype success evaluation
- - Clusters interpretation
+## Organization within the team
 
-:clock5: 01-12
-- Analysis of archetypes (step 2)
-
-:clock7: 08-12 
-- Finalize answers to the research questions
-- Connect findings together to get a story
-
-:clock9: 15-12 
-- Clean the code
-- Clean the textual description
-- Draft Data Story
-
-:clock12: 22-12 
-- Final Data Story (P3 deadline)
-
-## Organization within the team: A list of internal milestones up until project Milestone P3.
 |        |                           Tasks|
 |--------|---------------------------------|
-|Jiasheng|Initial data analysis and Step 3 |
-|   Edvin|   Step 4 and Data Story         |
-|    Rita|          Step 1 and code review |
-|   Naoki|Step 4 and assisting in Steps 2&3|
+|Jiasheng|Initial analysis, Step 3 and Data Story  |
+|   Edvin|   Steps 2, 4 and Data Story         |
+|    Rita|          Step 1,2 and code review |
+|   Naoki|Steps 3 and 4|
 | Mikhail|         Step 2 and Data Story   |
